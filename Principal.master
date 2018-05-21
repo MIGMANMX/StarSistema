@@ -1,0 +1,481 @@
+﻿<%@ Master Language="VB" CodeFile="Principal.master.vb" Inherits="Principal" %>
+
+<!DOCTYPE html>
+<html>
+  <head runat="server">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin | STAR San Luis</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="css/_all-skins.min.css">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="img/favicon.ico">
+       <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+  </head>
+  <body class="hold-transition skin-blue-light sidebar-mini">
+
+      <form id="form1" runat="server">
+          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <div class="wrapper">
+
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href= "<%=ResolveUrl("Sistema.aspx")%>" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>AD</b>M</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>ADMINISTRATIVO</b></span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">NavegaciÃ³n</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->
+              
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <small class="bg-green">Online</small>
+                  <span class="hidden-xs"><%=Session("usuario") %></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+              <li class="user-header">
+                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  STAR SAN LUIS 
+                  <small>Sistema Administrativo</small>
+                </p>
+              </li>
+                  
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    
+                    <div class="pull-right">
+                     
+                         <asp:Button ID="btnSalir" runat="server" Text="Salir" CssClass="btn btn-default btn-block btn-flat" TabIndex="3" ></asp:Button>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              
+            </ul>
+          </div>
+
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+                    
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header"></li>
+            
+            
+       <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>CATÁLOGOS</span>       
+              <i class="fa fa-angle-left pull-right"></i>       
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+            <li class="treeview">
+              <a href="#"><i class="fa fa-user"></i> Empleados
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="<%=ResolveUrl("Empleados.aspx")%>"><i class="fa fa-chevron-right"></i> Empleado</a></li>
+                <li><a href="<%=ResolveUrl("Usuarios.aspx")%>"><i class="fa fa-chevron-right"></i> Usuarios</a></li>
+              </ul>
+            </li>
+              
+
+              <li class="treeview">
+              <a href="#"><i class="fa fa-truck"></i> Proveedores
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="<%=ResolveUrl("ProveedorCompras.aspx")%>"><i class="fa fa-chevron-right"></i> Compras</a></li>
+                <li><a href="<%=ResolveUrl("ProveedorGastos.aspx")%>"><i class="fa fa-chevron-right"></i> Gastos</a></li>
+              </ul>
+            </li>
+           
+
+           <li class="treeview">
+              <a href="#"><i class="fa fa-tag"></i> Productos
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="<%=ResolveUrl("Productos.aspx")%>"><i class="fa fa-chevron-right"></i> Productos</a></li>
+                <li><a href="<%=ResolveUrl("ProductosDeVenta.aspx")%>"><i class="fa fa-chevron-right"></i> Menú de Venta</a></li>
+                <li><a href="<%=ResolveUrl("Receta.aspx")%>"><i class="fa fa-chevron-right"></i> Recetas</a></li>
+               <%-- <li><a href="<%=ResolveUrl("Consumos.aspx")%>"><i class="fa fa-chevron-right"></i> Consumos Promedio</a></li>--%>
+              </ul>
+            </li>
+              
+              <li class="treeview">
+              <a href="#"><i class="fa fa-server"></i> Clases
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="<%=ResolveUrl("Clases.aspx")%>"><i class="fa fa-chevron-right"></i> Clases de Productos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Clases de Gastos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Conceptos de Gastos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Concepto de Vales</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Clases de Caja Ch.</a></li>
+              </ul>
+            </li>
+
+
+               <li class="treeview">
+              <a href="#"><i class="fa fa-cogs"></i> Configuración
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Sucursales</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Incidencias</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Discrepancias</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Presupuestos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Objetivos</a></li>
+              </ul>
+            </li>
+
+               <li class="treeview">
+              <a href="#"><i class="fa fa-cubes"></i> Equipos
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Clases de Activos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Activos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Refacciones</a></li>
+               
+              </ul>
+            </li>
+
+          </ul>
+        </li>
+
+        <li  id="Ventas" runat="server">
+              <a href="#">
+              <i class="fa fa-shopping-cart"></i> <span>VENTAS</span></a>
+        </li> 
+
+       <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>OPERACIONES</span>            
+              <i class="fa fa-angle-left pull-right"></i>           
+          </a>
+          
+           <ul class="treeview-menu" style="display: none;">
+
+            <li id="OCompras" runat="server"><a href="#"><i class="fa fa-cart-plus"></i> Compras</a></li>
+            <li id="OGastos" runat="server"><a href="#"><i class="fa fa-usd"></i> Gastos</a></li>
+            <li id="OCajaChica" runat="server"><a href="#"><i class="fa fa-television"></i> Caja Chica</a></li>
+            <li id="OTransferencias" runat="server"><a href="#"><i class="fa fa-credit-card"></i> Transferencias</a></li>
+            <li id="OInventarios" runat="server"><a href="#"><i class="fa fa-clipboard"></i> Inventarios</a></li>
+            
+
+            <li class="treeview">
+              <a href="#"><i class="fa fa-archive"></i> Vales
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Vales</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pagar Vales</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Cancelar Vales</a></li>
+                
+              </ul>
+            </li>
+
+
+             <li class="treeview">
+              <a href="#"><i class="fa fa-print"></i> Vales de Cortes
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Vales de Cortes</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pagar Vales</a></li>
+              </ul>
+            </li>
+
+             <li class="treeview">
+              <a href="#"><i class="fa fa-newspaper-o"></i> Pagos de Vales RRHH
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pagar Vales Star SL</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pagar Vales Talentos</a></li>
+              </ul>
+            </li>
+
+            <li id="OCortesdeCaja" runat="server"><a href="#"><i class="fa fa-folder-open-o"></i> Cortes de Caja</a></li>
+            </ul></li>
+            
+            <li class="treeview" >
+              <a href="#"><i class="fa fa-money"></i>
+                <span> PAGOS</span>
+                  <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Programar Pagos</a></li>             
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pagos</a></li>                
+              </ul>
+            </li>
+
+             
+               <li class="treeview">
+          <a href="#">
+            <i class="fa fa-bar-chart"></i> <span>REPORTES</span>       
+              <i class="fa fa-angle-left pull-right"></i>       
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+            <li class="treeview">
+              <a href="#"><i class="fa fa-university"></i> Compras
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Compras por Proveedor</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Compras por Clase</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Compras por Artículo</a></li>
+              </ul>
+            </li>
+
+
+              <li class="treeview">
+              <a href="#"><i class="fa fa-keyboard-o"></i> Caja Chica
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Caja Chica</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Caja Chica Sin Vales</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Caja Chica a Detalle</a></li>
+              </ul>
+            </li>
+
+
+           <li class="treeview">
+              <a href="#"><i class="fa fa-inbox"></i> Vales
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Vales Consecutivos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Vales por Empleado</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Reporte Entrega RRHH</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Vales Contabilidad</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Vales por Empleado RRHH</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Saldo de Vales</a></li>
+              </ul>
+            </li>
+
+              <li class="treeview">
+              <a href="#"><i class="fa fa-file-pdf-o"></i> Cortes
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Cortes por Empleado</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Cortes Auditoria</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Totales Administracion</a></li>
+              </ul>
+            </li>
+
+
+               <li class="treeview">
+              <a href="#"><i class="fa fa-file-word-o"></i> Inventarios
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Costos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pedidos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Existencias</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Faltantes</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Diferencias</a></li>
+              
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Inventario al día</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Inventario Supervisor</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Comparativo</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Listado de Insumos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Waste</a></li>
+              
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Incidencias para Críticos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Incidencias por Producto</a></li>
+              </ul>
+            </li>
+
+               <li><a href="#"><i class="fa fa-file-excel-o"></i> Transferencias</a></li> 
+
+               <li class="treeview">
+              <a href="#"><i class="fa fa-cubes"></i> Ventas
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Ventas por Producto</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Ventas Totales</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Ticket Promedio</a></li>          
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Ventas por Día</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Depósitos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Recetas</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Menú de Venta</a></li>
+              </ul>
+            </li>
+
+
+               <li class="treeview">
+              <a href="#"><i class="fa fa-file-code-o"></i> Gastos y Pagos
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Gastos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pagos por Proveedor</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Pagos por Movimiento</a></li>          
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Saldos</a></li>
+              </ul>
+            </li>
+
+               <li class="treeview">
+              <a href="#"><i class="fa fa-file-audio-o"></i> Interfaces
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Compras</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Ventas</a></li>
+               
+              </ul>
+            </li>
+
+                <li><a href="#"><i class="fa fa-binoculars"></i> Buscar Folio</a></li> 
+
+          </ul>
+        </li>
+
+
+            <li>
+              <a href="#">
+                <i class="fa fa-star"></i> <span>Acerca De...</span>
+                <small class="label pull-right bg-yellow">Star</small>
+              </a>
+            </li>
+                        
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+         
+      </aside>
+
+
+
+
+
+       <!--Contenido-->
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+          <section class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Sistema Administrativo</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    
+                   
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  	<div class="row">
+	                  	<div class="col-md-12">
+		                          <!--Contenido-->
+                              <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+
+
+                                  <asp:TextBox ID="tb" runat="server"></asp:TextBox>
+
+
+                              </asp:ContentPlaceHolder>
+		                          <!--Fin Contenido-->
+                           </div>
+                        
+                  		
+                  	</div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div>
+       </section>
+      </div>
+
+
+      <!--Fin-Contenido-->
+     
+          
+           <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; 2018 <a href=""></a>.</strong> All rights reserved -  Star San Luis
+      </footer>
+
+      
+    <!-- jQuery 2.1.4 -->
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="js/app.min.js"></script>
+    </form>
+  </body>
+</html>
