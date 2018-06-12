@@ -83,6 +83,7 @@
 
         </nav>
       </header>
+        </div>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -148,10 +149,10 @@
               </a>
               <ul class="treeview-menu" style="display: none;">
                 <li><a href="<%=ResolveUrl("Clases.aspx")%>"><i class="fa fa-chevron-right"></i> Clases de Productos</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Clases de Gastos</a></li>
+                <li><a href="<%=ResolveUrl("ClasesdeGastos.aspx")%>"><i class="fa fa-chevron-right"></i> Clases de Gastos</a></li>
                 <li><a href="#"><i class="fa fa-chevron-right"></i> Conceptos de Gastos</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Concepto de Vales</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Clases de Caja Ch.</a></li>
+                <li><a href="<%=ResolveUrl("ConceptosdeVales.aspx")%>"><i class="fa fa-chevron-right"></i> Concepto de Vales</a></li>
+                <li><a href="<%=ResolveUrl("ClasesdeCajaChica.aspx")%>"><i class="fa fa-chevron-right"></i> Clases de Caja Ch.</a></li>
               </ul>
             </li>
 
@@ -163,9 +164,9 @@
                 </span>
               </a>
               <ul class="treeview-menu" style="display: none;">
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Sucursales</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Incidencias</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Discrepancias</a></li>
+                <li><a href="<%=ResolveUrl("ConfiSucursales.aspx")%>""><i class="fa fa-chevron-right"></i> Sucursales</a></li>
+                <li><a href="<%=ResolveUrl("ConfiIncidencias.aspx")%>"><i class="fa fa-chevron-right"></i> Incidencias</a></li>
+                <li><a href="<%=ResolveUrl("ConfiDiscrepancia.aspx")%>"><i class="fa fa-chevron-right"></i> Discrepancias</a></li>
                 <li><a href="#"><i class="fa fa-chevron-right"></i> Presupuestos</a></li>
                 <li><a href="#"><i class="fa fa-chevron-right"></i> Objetivos</a></li>
               </ul>
@@ -466,7 +467,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2018 <a href=""></a>.</strong> All rights reserved -  Star San Luis
+        <strong>Copyright &copy; 2018 <a href="#"></a>.</strong> All rights reserved -  Star San Luis
       </footer>
 
       

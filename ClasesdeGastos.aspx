@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Principal.master" AutoEventWireup="false" CodeFile="Clases.aspx.vb" Inherits="_Clases" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Principal.master" AutoEventWireup="false" CodeFile="ClasesdeGastos.aspx.vb" Inherits="_ClasesdeGastos" %>
 
 <%@ Register src="cti/wucClasesInsumos.ascx" tagname="wucClasesInsumos" tagprefix="uc1" %>
 <%@ Register src="cti/wucClasesInsumos.ascx" tagname="wucClasesInsumos" tagprefix="uc2" %>
@@ -20,28 +20,33 @@
              float:right;
         }
       .auto-style1 {
-          width: 225px;
+          width: 493px;
       }
       .auto-style6 {
           height: 24px;
       }
       .auto-style8 {
-          width: 1148px;
-            margin-right: 0px;
-        }
+          width: 984px;
+      }
       .auto-style9 {
           width: 306px;
       }
       .auto-style20 {
-        width: 1078px;
+        width: 472px;
     }
-        .auto-style22 {
-            width: 64px;
+        .auto-style21 {
+            width: 200px;
         }
-        .auto-style25 {
-            width: 40px;
+        .auto-style24 {
+            width: 501px;
         }
-        </style>
+    .auto-style25 {
+        width: 171px;
+    }
+    .auto-style26 {
+        width: 181px;
+    }
+  </style>
     <div id="contenedor" class="auto-style8">
     <% If IsNumeric(Session("idz_e")) Then
             Response.Write("<div id=confirmar style='position:fixed; left:200; top:300; background-color:White; border-style:solid; border-width:1px; border-color:Black;'>")
@@ -56,7 +61,7 @@
             Response.Write("<tr><td height=6 /></tr></table></div>")
         End If%>
 
-    <h3>&nbsp;Clases de Productos</h3>
+    <h3>Clases de Gastos</h3>
     <div id="izquierdo" class="auto-style20">
         <table>
             <tr>
@@ -65,22 +70,16 @@
         </table>
         <asp:GridView ID="GridView1" runat="server" 
             DataKeyNames ="idclase" AutoGenerateColumns="False" CellPadding="4" 
-            ForeColor="#333333" GridLines="None" Width="1067px">
+            ForeColor="#333333" GridLines="None" Width="464px">
             <Columns>
                 <asp:BoundField DataField="idclase" ItemStyle-Width="1" ItemStyle-Font-Size="1" >
 <ItemStyle Font-Size="1pt" Width="1px"></ItemStyle>
                 </asp:BoundField>
                 <asp:ButtonField ButtonType="Image" CommandName="Editar" ImageUrl="~/Imagenes/editar.png"></asp:ButtonField>
-                <asp:BoundField DataField="clave" HeaderText="Clave" SortExpression="Clave" />
-                 <asp:BoundField DataField="clase" HeaderText="Clase" SortExpression="clase" />     
-                <asp:BoundField DataField="cuenta_s1" HeaderText="Cuenta_s1" SortExpression="cuenta_s1" />
-                <asp:BoundField DataField="cuenta_s2" HeaderText="Cuenta_s2" SortExpression="cuenta_s2" />
-                <asp:BoundField DataField="cuenta_s3" HeaderText="Cuenta_s3" SortExpression="cuenta_s3" />
-                <asp:BoundField DataField="cuenta_s4" HeaderText="Cuenta_s4" SortExpression="cuenta_s4" />
-                <asp:BoundField DataField="cuenta_s5" HeaderText="Cuenta_s5" SortExpression="cuenta_s5" />
-                <asp:BoundField DataField="cuenta_s6" HeaderText="Cuenta_s6" SortExpression="cuenta_s6" />
-                <asp:BoundField DataField="cuenta_l" HeaderText="Cuenta_L" SortExpression="cuenta_l" />
-                <asp:BoundField DataField="cuenta_i" HeaderText="Cuenta_I" SortExpression="cuenta_i" />     
+               <asp:BoundField DataField="clave" HeaderText="Clave" SortExpression="clave" />     
+                 <asp:BoundField DataField="clase" HeaderText="Clase" SortExpression="clase" />                 
+                <asp:BoundField DataField="grupo" HeaderText="Grupo" SortExpression="grupo" />
+                        
                 
                 <asp:ButtonField ButtonType="Image" CommandName="Eliminar" ImageUrl="~/Imagenes/eliminar.png"></asp:ButtonField> 
            </Columns>
@@ -92,15 +91,19 @@
             <PagerStyle BackColor="#3088b0" ForeColor="#333333" HorizontalAlign="Center" />
         </asp:GridView>
         <asp:TextBox ID="grdSR" runat="server" Visible="false"></asp:TextBox>
-        <br />
+    </div> <!-- listaDatos -->
+    <div id="derecho" class="auto-style24">
         <table class="auto-style1">
             <tr>
                 <td colspan="2">
                     <h4 class="auto-style9">
-                        Editar registro de Clases de productos</h4>
+                        Editar registro de Clases de Gastos</h4>
                 </td>
                     
                
+                <td class="auto-style21">
+                    </td>
+                
             </tr>
             <tr>
                 <td class="auto-style25">
@@ -111,7 +114,7 @@
                   
                     <br />
                     </td>
-                 <td class="auto-style22">
+                 <td class="auto-style26">
                   
                     <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-success btn-block btn-flat" Text="Agregar" ToolTip="Agregar" Width="108px" />
                   
@@ -119,50 +122,20 @@
                     </td>
             </tr>
             <tr>
-                <td class="auto-style25">Clase:<br />
-                    <asp:TextBox ID="TxtClase" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" /></td>
-                <td class="auto-style22">Clave:<br />
-                                    <asp:TextBox ID="Txtclave" runat="server" CssClass="txtCaptura" MaxLength="40" Width="79px" style="margin-left: 0" />
+                <td class="auto-style25">Clave:<br />
+                    <asp:TextBox ID="TxtClave" runat="server" CssClass="txtCaptura" MaxLength="40" Width="100px" /></td>
+                <td class="auto-style26">Clase:<br />
+                                    <asp:TextBox ID="TxtClase" runat="server" CssClass="txtCaptura" MaxLength="40" Width="184px" style="margin-left: 0" />
                 </td>  
-            </tr>
-            <tr>
-                <td class="auto-style25">Cuenta S1:<br />
-                    <asp:TextBox ID="TxtCuentaS1" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" /></td>
-                <td class="auto-style22">CuentaS2:<br />
-                                    <asp:TextBox ID="TxtCuentaS2" runat="server" CssClass="txtCaptura" MaxLength="40" Width="114px" style="margin-left: 0" />
-                </td>  
-            </tr>
-            <tr>
-                <td class="auto-style25">Cuenta S3:<br />
-                    <asp:TextBox ID="TxtCuentaS3" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" /></td>
-                <td class="auto-style22">CuentaS4:<br />
-                                    <asp:TextBox ID="TxtCuentaS4" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" style="margin-left: 0" />
-                </td>  
-            </tr>
-            <tr>
-                <td class="auto-style25">Cuenta S5:<br />
-                    <asp:TextBox ID="TxtCuentaS5" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" /></td>
-                <td class="auto-style22">CuentaS6:<br />
-                                    <asp:TextBox ID="TxtCuentaS6" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" style="margin-left: 0" />
-                </td>  
-            </tr>
-            <tr>
-                <td class="auto-style25">Cuenta L:<br />
-                    <asp:TextBox ID="TxtCuentaL" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" /></td>
-                <td class="auto-style22">Cuenta I:<br />
-                                    <asp:TextBox ID="TxtCuentaI" runat="server" CssClass="txtCaptura" MaxLength="40" Width="115px" style="margin-left: 0" />
-                </td>  
-            </tr>
-            <tr>
-                <td class="auto-style25">
+                <td class="auto-style21">
 
-                    Impacta Costo:<asp:checkbox ID="Chkimpacta" runat="server" /> 
+                    Grupo:<br />
+                    <asp:TextBox ID="TxtGrupo" runat="server" CssClass="txtCaptura" MaxLength="40" Width="67px" />
 
-                </td>
+                </td>      
             </tr>
+            
              </table>
-    </div> <!-- listaDatos -->
-    <div>
     </div> <!-- registroDatos -->
 </div>
 </asp:Content>
