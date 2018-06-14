@@ -167,8 +167,8 @@
                 <li><a href="<%=ResolveUrl("ConfiSucursales.aspx")%>""><i class="fa fa-chevron-right"></i> Sucursales</a></li>
                 <li><a href="<%=ResolveUrl("ConfiIncidencias.aspx")%>"><i class="fa fa-chevron-right"></i> Incidencias</a></li>
                 <li><a href="<%=ResolveUrl("ConfiDiscrepancia.aspx")%>"><i class="fa fa-chevron-right"></i> Discrepancias</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Presupuestos</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Objetivos</a></li>
+               <%-- <li><a href="#"><i class="fa fa-chevron-right"></i> Presupuestos</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i> Objetivos</a></li>--%>
               </ul>
             </li>
 
@@ -179,9 +179,9 @@
                 </span>
               </a>
               <ul class="treeview-menu" style="display: none;">
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Clases de Activos</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Activos</a></li>
-                <li><a href="#"><i class="fa fa-chevron-right"></i> Refacciones</a></li>
+                <li><a href="<%=ResolveUrl("EquipClase.aspx")%>"><i class="fa fa-chevron-right"></i> Clases de Activos</a></li>
+                <li><a href="<%=ResolveUrl("EquipActivo.aspx")%>"><i class="fa fa-chevron-right"></i> Activos</a></li>
+                <li><a href="<%=ResolveUrl("EquipRefac.aspx")%>"><i class="fa fa-chevron-right"></i> Refacciones</a></li>
                
               </ul>
             </li>
