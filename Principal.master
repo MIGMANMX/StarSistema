@@ -190,7 +190,7 @@
         </li>
 
         <li  id="Ventas" runat="server">
-              <a href="#">
+              <a href="<%=ResolveUrl("Ventas.aspx")%>">
               <i class="fa fa-shopping-cart"></i> <span>VENTAS</span></a>
         </li> 
 
