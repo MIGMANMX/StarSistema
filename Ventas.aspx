@@ -3,7 +3,7 @@
 <%@ Register src="cti/wucSucursales.ascx" tagname="wucSucursales" tagprefix="uc1" %>
 <%@ Register src="cti/wucPuestos.ascx" tagname="wucPuestos" tagprefix="uc2" %>
 <%@ Register src="cti/wucSuc.ascx" tagname="wucSuc" tagprefix="uc3" %>
-<%@ Register src="cti/wucTipoJornada.ascx" tagname="wucTipoJornada" tagprefix="uc4" %>
+<%@ Register src="cti/wucFormasPagoSub.ascx" tagname="wucFormasPagoSub" tagprefix="uc4" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -38,9 +38,6 @@
       .auto-style11 {
           height: 24px;
           width: 144px;
-      }
-      .auto-style18 {
-          width: 185px;
       }
       .auto-style19 {
           width: 179px;
@@ -222,13 +219,13 @@
         .auto-style83 {
             width: 152px;
         }
-        .auto-style84 {
-            width: 153px;
-        }
         .auto-style85 {
             width: 156px;
         }
-  </style>
+        .auto-style86 {
+            height: 39px;
+        }
+        </style>
     <div id="contenedor" class="auto-style8">
     <% If IsNumeric(Session("idz_e")) Then
             Response.Write("<div id=confirmar style='position:fixed; left:200; top:300; background-color:White; border-style:solid; border-width:1px; border-color:Black;'>")
@@ -314,32 +311,55 @@
     <div id="derecho" class="auto-style39">
         <table class="auto-style1">
             <tr>
-                <td colspan="2">
+                <td colspan="2" class="auto-style86">
                     <h4 class="auto-style9">
                         Editar registro de Ventas</h4>  </td>
                     
                
-                <td>
+                <td class="auto-style86">
                     </td>
                 
             </tr>
             <tr>
-                <td class="auto-style84">
+                <td class="auto-style57">
+
+                      <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-info btn-block btn-flat" Text="Actualizar"  ToolTip="Actualizar datos" Enabled="false" Width="108px" />
+
+                </td>
+                <td class="auto-style85">
+
+                      <asp:Button ID="btnDepos" runat="server" CssClass="btn btn-primary btn-block btn-flat" Text="Depositos"  ToolTip="Actualizar datos" Enabled="false" Width="108px" />
+
+                </td>
+                <td>
+
+                    <asp:label ID="Lmsg" runat="server" CssClass="error"></asp:label>
                   
+                  
+                  
+                </td>
+            </tr>
+              </table>
+        <hr />
+            <table>
+            <tr>
+                <td class="auto-style6">Sucursal:<br />
+                    <uc1:wucsucursales ID="wucSucursales1" runat="server" />
+                    
+                    <br />
+                    <asp:label ID="lblsuc" runat="server" CssClass="error"></asp:label>
+                  
+                </td>
+                
+                <td class="auto-style10">Subotal:<br />
+                    <asp:TextBox ID="total" runat="server" CssClass="txtCaptura" MaxLength="40" Width="102px" Height="22px" /></td>
+                <td class="auto-style19">                  
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Depositos
 </button>
 
-                    <br />
-                  
-                    <br />
-                    </td>
-              <td class="auto-style85">
-                  
-                      <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-info btn-block btn-flat" Text="Actualizar"  ToolTip="Actualizar datos" Enabled="false" Width="108px" />
-                  
-                  <!-- Button trigger modal -->
-
+                    
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -372,34 +392,12 @@
     </div>
   </div>
 </div>
-                    <br />
-                    </td>
-                <td>
-                    <asp:label ID="Lmsg" runat="server" CssClass="error"></asp:label>
-                  
-                  
-                  
-                    <br />
-                  
-                  
-                  
-                    </td>      
-            </tr>
-              </table>
-        <hr />
-            <table>
-            <tr>
-                <td class="auto-style6">Sucursal:<br />
-                    <uc1:wucsucursales ID="wucSucursales1" runat="server" /></td>
-                
-                <td class="auto-style10">Subotal:<br />
-                    <asp:TextBox ID="TxtSubtotal" runat="server" CssClass="txtCaptura" MaxLength="40" Width="102px" Height="22px" /></td>
-                <td class="auto-style19">                  
-                    &nbsp;</td>
+
+                </td>
             </tr>
             <tr>
                 <td class="auto-style21">Fecha:<br />
-                    <asp:TextBox ID="TxtFecha" runat="server" CssClass="txtCaptura" MaxLength="40" Width="135px" />
+                    <asp:TextBox ID="fecha" runat="server" CssClass="txtCaptura" MaxLength="40" Width="135px" />
 
                     
                     &nbsp;<asp:ImageButton ID="ImageButton5" runat="server" Height="18px" ImageUrl="~/img/favicon.ico" Width="19px" />
@@ -407,11 +405,11 @@
                     </td>
 
                 <td class="auto-style10">IVA:<br />
-                    <asp:TextBox ID="TxtIva" runat="server" CssClass="txtCaptura" MaxLength="40" Width="74px" /></td>
+                    <asp:TextBox ID="IVA" runat="server" CssClass="txtCaptura" MaxLength="40" Width="74px" /></td>
                 <td class="auto-style19">
                    
                     Total :&nbsp;
-                    <asp:label ID="totalLabel" runat="server" CssClass="error"></asp:label>
+                    <asp:label ID="lblTotal" runat="server" CssClass="error"></asp:label>
                   
                 </td>
             </tr>
@@ -461,22 +459,28 @@
              
             <td class="auto-style29">
 
-                    <asp:TextBox ID="numero0" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="TickEmpC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero1" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="TickEmpT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style30">
                     Comedor: </td>
                 <td class="auto-style29">
 
-                    <asp:TextBox ID="numero10" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="ComedorC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero11" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="ComedorT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style40">Efectivo: </td>
                 <td class="auto-style30">
 
-                    <asp:TextBox ID="numero16" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="EfectivoC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero17" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="EfectivoT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
 
             <tr>
@@ -485,21 +489,27 @@
                     Pagados: </td>
                 <td class="auto-style11">
 
-                    <asp:TextBox ID="numero2" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="TickPagC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero3" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="TickPagT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style31">Llevar: </td>
                 <td class="auto-style71">
 
-                    <asp:TextBox ID="numero12" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="LlevarC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero13" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="LlevarT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style33">Vales: </td>
                 <td>
 
-                    <asp:TextBox ID="numero18" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="ValesC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero19" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="ValesT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
              <tr>
                 <td class="auto-style76">Voids: 
@@ -507,21 +517,27 @@
                  </td>
                 <td>
 
-                    <asp:TextBox ID="numero4" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="VoidsC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero5" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="VoidsT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>     
                <td>Auto: </td>
                  <td class="auto-style71">
 
-                    <asp:TextBox ID="numero14" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="AutoC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero15" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="AutoT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>
                  <td class="auto-style33">City:&nbsp;&nbsp; </td>
                  <td>
 
-                    <asp:TextBox ID="numero20" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="CityC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero21" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="CityT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>
             </tr>
             <tr>
                 <td class="auto-style74">Mgr Voids: 
@@ -530,17 +546,21 @@
              
             <td class="auto-style29">
 
-                    <asp:TextBox ID="numero6" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="MgrVoidsC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero7" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="MgrVoidsT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style30">&nbsp;</td>
                 <td class="auto-style71"></td>
                 <td class="auto-style30">Tarj Credito: </td>
                 <td class="auto-style30">
 
-                    <asp:TextBox ID="numero22" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="VisaC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero23" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="VisaT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
 
             <tr>
@@ -549,17 +569,21 @@
                 </td>
                 <td class="auto-style11">
 
-                    <asp:TextBox ID="numero8" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="CorrecionC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero9" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="CorreccionT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style31"></td>
                 <td class="auto-style71"></td>
                 <td class="auto-style31">Tarj Debito: </td>
                 <td class="auto-style31">
 
-                    <asp:TextBox ID="numero24" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="DebC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero25" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="DebT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style77">
@@ -570,9 +594,11 @@
                 <td class="auto-style78">American Exp: </td>
                 <td class="auto-style78">
 
-                    <asp:TextBox ID="numero26" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="AmericanC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero27" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="AmericanT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
             <tr>
                 <td class="auto-style76">
@@ -583,9 +609,11 @@
                 <td>Uber eats: </td>
                 <td>
 
-                    <asp:TextBox ID="numero28" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="UberC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero29" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="UberT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
             </table>
         
@@ -608,187 +636,239 @@
              
             <td class="auto-style60">
 
-                    <asp:TextBox ID="numero30" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc10C" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero31" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="Desc10T" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style66">
                     Hamburguesas: </td>
                 <td class="auto-style50">
 
-                    <asp:TextBox ID="numero32" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="HambC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero33" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="HambT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
 
             <tr>
                 <td class="auto-style44">15%:</td>
                 <td class="auto-style61">
 
-                    <asp:TextBox ID="numero36" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc15C" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero37" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="Desc15T" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
                 <td class="auto-style67">Fritos: </td>
                 <td class="auto-style51">
 
-                    <asp:TextBox ID="numero38" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <asp:TextBox ID="FritosC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero39" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="FritosT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                </td>
             </tr>
              <tr>
                 <td class="auto-style54">20%:</td>
                 <td class="auto-style63">
 
-                    <asp:TextBox ID="numero42" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc20C" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero43" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc20T" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>     
                <td class="auto-style55">Ensaladas: </td>
                  <td class="auto-style56">
 
-                    <asp:TextBox ID="numero44" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="EnsalC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="numero45" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="EnsalT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>
             </tr>
                  <tr>
                 <td class="auto-style57">25%:</td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox5" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc25C" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox6" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc25T" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style68">Postres: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox7" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="PostresC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox8" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="PostresT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
             </tr>
                  <tr>
                 <td class="auto-style57">20% Farm. Ahorro: </td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox11" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc20FAC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox12" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc20FAT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style68">Combos: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox13" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="CombosC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox14" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="CombosT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
             </tr>
                  <tr>
                 <td class="auto-style44">20% Emp: </td>
                 <td class="auto-style61">
 
-                    <asp:TextBox ID="TextBox17" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc20EC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox18" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc20ET" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style67">Bebidas: </td>
                  <td class="auto-style52">
 
-                    <asp:TextBox ID="TextBox19" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <asp:TextBox ID="BebidasC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox20" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="BebidasT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
             </tr>
                  <tr>
                 <td class="auto-style57">50% Emp: </td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox23" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc50EC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox24" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc50ET" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style68">Condimentos: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox25" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <asp:TextBox ID="CondC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox26" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="CondT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
             </tr>
                  <tr>
                 <td class="auto-style54">50% Socios: </td>
                 <td class="auto-style63">
 
-                    <asp:TextBox ID="TextBox29" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc50SoC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox30" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc50SoT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style55">Promociones: </td>
                  <td class="auto-style56">
 
-                    <asp:TextBox ID="TextBox31" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <asp:TextBox ID="PromoC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox32" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="PromoT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
             </tr>
                  <tr>
                 <td class="auto-style57">60% Emp.: </td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox35" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc60Emp" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox36" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc60ET" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style68">CB Kid: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox37" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <asp:TextBox ID="CBKidC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox38" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="CBKidT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
             </tr>
                  <tr>
                 <td class="auto-style57">90% Emp.: </td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox41" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc90Emp" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox42" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc90ET" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style68">Fiestas: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox43" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="FiestaC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox44" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="FiestaT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
             </tr>
                  <tr>
                 <td class="auto-style57">99% Cumple: </td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox47" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc100C" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox48" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc100CT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>     
                <td class="auto-style68">Sobrantes: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox49" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="SobranteC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox50" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="SobranteT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                     </td>
 
             </tr>
              <tr>
                 <td class="auto-style57">99% Socios: </td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox53" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc100SC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox54" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc100ST" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>     
                <td class="auto-style68">Anticipos Fiesta: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox55" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                    <asp:TextBox ID="AntC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox56" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="AntT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>
 
             </tr>
              <tr>
                 <td class="auto-style57">99% Cort: </td>
                 <td class="auto-style19">
 
-                    <asp:TextBox ID="TextBox59" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="Desc100CoC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox60" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>     
+                    <asp:TextBox ID="Desc100CoT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>     
                <td class="auto-style68">Waste: </td>
                  <td class="auto-style51">
 
-                    <asp:TextBox ID="TextBox61" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="WasteC" runat="server" CssClass="txtCaptura" MaxLength="40" Width="32px" >0</asp:TextBox>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 
-                    <asp:TextBox ID="TextBox62" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" /></td>
+                    <asp:TextBox ID="WasteT" runat="server" CssClass="txtCaptura" MaxLength="40" Width="66px" >0</asp:TextBox>
+                 </td>
 
             </tr>
             </table>
