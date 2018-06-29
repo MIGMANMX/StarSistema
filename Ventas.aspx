@@ -328,8 +328,11 @@
                 </td>
                 <td class="auto-style85">
 
-                      <asp:Button ID="btnDepos" runat="server" CssClass="btn btn-primary btn-block btn-flat" Text="Depositos"  ToolTip="Actualizar datos" Enabled="false" Width="108px" />
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="Dep" runat="server">
+    Depositos
+</button>
 
+                    
                 </td>
                 <td>
 
@@ -346,7 +349,8 @@
                 <td class="auto-style6">Sucursal:<br />
                     <uc1:wucsucursales ID="wucSucursales1" runat="server" />
                     
-                    <br />
+                    
+                 
                     <asp:label ID="lblsuc" runat="server" CssClass="error"></asp:label>
                   
                 </td>
@@ -355,38 +359,74 @@
                     <asp:TextBox ID="total" runat="server" CssClass="txtCaptura" MaxLength="40" Width="102px" Height="22px" /></td>
                 <td class="auto-style19">                  
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Depositos
-</button>
-
                     
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Depositos</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h2 class="modal-title" id="exampleModalLabel">Depósitos</h2>
+        <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+          <%--<span aria-hidden="true">&times;</span>--%>
+        <%--</button>--%>
       </div>
       <div class="modal-body">
           <table>
-        <tr>
-                <td class="auto-style18">Empleado:<br />
-                    <asp:TextBox ID="TextBox1" runat="server" CssClass="txtCaptura" MaxLength="40" Width="168px" /></td>
-                <td class="auto-style19">Puesto:<br />
-                    <uc2:wucpuestos ID="WucPuestos1" runat="server" /></td>  
-                <td>
+              <tr>
+                <td>Sucursal:<asp:label ID="lblSucM" runat="server" CssClass="error"></asp:label>
+                </td>
+              </tr>
+              <tr>
+                <td>Fecha:<asp:label ID="lblFechaM" runat="server" CssClass="error"></asp:label>
+                </td>  
+              </tr>
+              <tr>
+                <td>Total:<asp:label ID="lblTotalM" runat="server" CssClass="error"></asp:label>
+                </td>   
+              </tr>  
+            
+          </table>
+           <asp:Button ID="ibGuardarCompra" runat="server" CssClass="btn btn-danger btn-block btn-flat" Text="Agregar"  ToolTip="Agregar datos" Enabled="false" Width="108px" />
+   
+          <hr />
+          <h3>AGREGAR FORMA DE PAGO</h3>
+           <table>
+          
+              <tr>
+                 <td>Realizó:<asp:TextBox ID="txtRealizoM" runat="server" CssClass="txtCaptura" MaxLength="40" Width="140px" Height="22px" />
+                 </td>
+                 <td>Referencia:<asp:TextBox ID="txtRefM" runat="server" CssClass="txtCaptura" MaxLength="40" Width="140px" Height="22px" />
+                 </td>
+                 <td>Comentarios:<asp:TextBox ID="txtInfoM" runat="server" CssClass="txtCaptura" MaxLength="40" Width="140px" Height="22px" />
+                 </td>                
+              </tr>
+             <tr>
+                 <td>Forma de Pago:<br />
+                     <uc4:wucFormasPagoSub ID="wucFormasPagoSub" runat="server" />
+                  </td>
+                 <td>Monto:	<asp:TextBox ID="txtMontoM" runat="server" CssClass="txtCaptura" MaxLength="40" Width="150px" Height="22px" />
+                 </td>
+                 <td>  <asp:Button ID="ibGuardarPartida" runat="server" CssClass="btn btn-warning btn-block btn-flat" Text="Agregar"  ToolTip="Agregar datos" Enabled="false" Width="108px" />
+                 </td>
+            </tr>          
+          </table>
+          <hr />
+          <h3>FORMAS DE PAGO</h3>
+         <table>
+              <tr>
+                <td>Monto total:<asp:label ID="ltotalM" runat="server" CssClass="error"></asp:label>
+                </td>
+              </tr>
+              <tr>
+                <td>Diferencia:<asp:label ID="ldifM" runat="server" CssClass="error"></asp:label>
+                </td>  
+              </tr>                       
+          </table>
 
-                    Sucursal:<br />
-                    <uc3:wucsuc ID="wucSuc1" runat="server" />
 
-                </td>      
-            </tr></table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
         <%--<button type="button" class="btn btn-primary">Guardar</button>--%>
       </div>
     </div>

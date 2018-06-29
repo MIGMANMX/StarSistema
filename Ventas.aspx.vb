@@ -35,6 +35,7 @@ Partial Class _Ventas
         Session("idz_e") = ""
         'Depositos.Visible = False
         btnActualizar.Enabled = False
+        Dep.Visible = False
         btnAgregar.Enabled = True
     End Sub
     Protected Sub wucSucursales_sucursalSeleccionada(sender As Object, e As System.EventArgs) Handles wucSucursales.sucursalSeleccionada
@@ -117,6 +118,7 @@ Partial Class _Ventas
             'Depositos.Visible = True
             btnActualizar.Enabled = True
             btnAgregar.Enabled = False
+            Dep.Visible = True
 
             'If Not Page.IsPostBack Then
             Dim dbC As SqlConnection = New SqlConnection
@@ -140,8 +142,10 @@ Partial Class _Ventas
                     IVA.Text = rdr("iva").ToString
                     subt = rdr("ventan")
                     ivaa = rdr("iva")
-                    lblTotal.Text = String.Format("{0:c}", subt + ivaa)
-                    If Session("nivel") = 1 Then
+                lblTotal.Text = String.Format("{0:c}", subt + ivaa)
+
+
+                If Session("nivel") = 1 Then
                         wucSucursales1.idSucursal = rdr("idsucursal").ToString
                     Else
                         lblsuc.Text = Session("suc")
@@ -834,9 +838,11 @@ Partial Class _Ventas
         dbC3.Dispose()
         'Response.Redirect("Ventas.aspx")
     End Sub
-    Protected Sub btnDepos_Click(sender As Object, e As EventArgs) Handles btnDepos.Click
-        Dim idventas2 As Integer
-        idventas2 = Request.QueryString("idc")
-        Response.Redirect("Depositos.aspx?idventas2=" & idventas2 & "&fecha=" & fecha.Text & "&suc=" & wucSucursales1.sucursal & "&subt=" & total.Text & "&iva=" & IVA.Text)
-    End Sub
+    'Protected Sub btnDepos_Click(sender As Object, e As EventArgs) Handles btnDepos.Click
+    '    Dim idventas2 As Integer
+    '    idventas2 = Request.QueryString("idc")
+    '    Response.Redirect("Depositos.aspx?idventas2=" & idventas2 & "&fecha=" & fecha.Text & "&suc=" & wucSucursales1.sucursal & "&subt=" & total.Text & "&iva=" & IVA.Text)
+    'End Sub
+
+
 End Class
